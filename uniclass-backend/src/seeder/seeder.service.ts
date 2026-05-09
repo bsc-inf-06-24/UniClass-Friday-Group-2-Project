@@ -3,7 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { User } from '../users/entities/user.entity';
 import { Course } from '../courses/entities/course.entity';
-import { SEED_COURSES, SEED_STUDENTS } from './seed-data';
+import { hashPassword } from '../auth/password.util';
+import { SEED_COURSES, SEED_LECTURERS, SEED_STUDENTS } from './seed-data';
 
 @Injectable()
 export class SeederService implements OnModuleInit {
@@ -29,6 +30,18 @@ export class SeederService implements OnModuleInit {
 
   private async seedDatabase() {
     await this.clearExistingData();
+
+    await this.usersRepository.save(
+      SEED_LECTURERS.map((lecturer) =>
+        this.usersRepository.create({
+          regNumber: lecturer.regNumber,
+          name: lecturer.name,
+          cohort: lecturer.cohort,
+          role: 'lecturer',
+          passwordHash: hashPassword(lecturer.password),
+        }),
+      ),
+    );
 
     const students = await this.usersRepository.save(
       SEED_STUDENTS.map((student) =>

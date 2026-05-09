@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';//
 import { CoursesModule } from './courses/courses.module'; //josh
 import { GroupsModule } from './groups/groups.module';//mirriam
 import { SeederModule } from './seeder/seeder.module';//patrick
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -28,6 +29,7 @@ synchronize: true,
 UsersModule,
 GroupsModule,
 CoursesModule,
+AuthModule,
 SeederModule,
 ],
   

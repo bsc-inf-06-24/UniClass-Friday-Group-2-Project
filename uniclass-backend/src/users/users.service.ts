@@ -28,49 +28,4 @@ export class UsersService {
       order: { regNumber: 'ASC' },
     });
   }
-
-  async findByGoogleId(
-    googleId: string,
-  ): Promise<User | null> {
-    return this.usersRepository.findOne({
-      where: { googleId },
-    });
-  }
-
-  async findOrCreate(
-    googleId: string,
-    email: string,
-    name: string,
-    photo?: string,
-    googleAccessToken?: string,
-  ): Promise<User> {
-    const existing = await this.findByGoogleId(
-      googleId,
-    );
-
-    if (!existing) {
-      const user = this.usersRepository.create({
-        googleId,
-        email,
-        name,
-        photo,
-        regNumber: googleId,
-        googleAccessToken,
-      });
-
-      await this.usersRepository.save(user);
-      return user;
-    }
-
-    if (googleAccessToken) {
-      existing.googleAccessToken =
-        googleAccessToken;
-
-      await this.usersRepository.save(
-        existing,
-      );
-    }
-
-    return existing;
-  }
 }

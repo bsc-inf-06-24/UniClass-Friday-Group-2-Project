@@ -31,8 +31,8 @@ export class User {
   @Column({ default: 'student' })
   role!: 'lecturer' | 'student';
 
-  @Column({ type: 'varchar2', length: 1000, nullable: true })
-  googleAccessToken?: string;
+  @Column({ nullable: true })
+  passwordHash?: string;
 
   @CreateDateColumn()
   createdAt!: Date;

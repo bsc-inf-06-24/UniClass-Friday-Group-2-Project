@@ -5,8 +5,9 @@ import { GroupsService } from './groups.service';
 import { GroupsController } from './groups.controller';
 import { CoursesModule } from '../courses/courses.module';
 import { UsersModule } from '../users/users.module';
+import { AuthModule } from '../auth/auth.module';
 @Module({
-  imports: [TypeOrmModule.forFeature([Group]), CoursesModule, UsersModule],
+  imports: [TypeOrmModule.forFeature([Group]), CoursesModule, UsersModule, AuthModule],
   providers: [GroupsService],
   controllers: [GroupsController],
   exports: [GroupsService],  

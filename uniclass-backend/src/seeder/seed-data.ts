@@ -4,6 +4,22 @@ export interface SeedStudent {
   cohort: string;
 }
 
+export interface SeedLecturer {
+  regNumber: string;
+  name: string;
+  password: string;
+  cohort: string;
+}
+
+export const SEED_LECTURERS: SeedLecturer[] = [
+  {
+    regNumber: 'LECT/000/00',
+    name: 'UniClass Lecturer',
+    password: 'Lecturer1234',
+    cohort: 'STAFF',
+  },
+];
+
 export interface SeedCourse {
   courseCode: string;
   name: string;

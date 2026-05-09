@@ -1,8 +1,12 @@
-import { Controller, Get, Post, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CoursesService } from './courses.service';
 import { LinkCourseDto } from './dto/link-course.dto';
 
 @Controller('api/v1/courses')
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth('access-token')
 export class CoursesController {
   constructor(private coursesService: CoursesService) {}
 
